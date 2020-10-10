@@ -92,8 +92,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'library_db',
-        'HOST': os.environ.get('DB_HOST', default='127.0.0.1'),
-        'PORT': 27017,
+        'CLIENT': {
+            'host': os.environ.get('DB_HOST', default='127.0.0.1'),
+            'port': 27017,
+            'username': 'root',
+            'password': 'example',
+        }
     }
 }
 
