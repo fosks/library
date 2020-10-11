@@ -34,7 +34,7 @@ def book_list(request):
 
     elif request.method == 'DELETE':
         count = BookData.objects.all().delete()
-        return JsonResponse({'message': '{} Tutorials were deleted successfully!'.format(count[0])},
+        return JsonResponse({'message': '{} Books were deleted successfully!'.format(count[0])},
                             status=status.HTTP_204_NO_CONTENT)
 
     return None

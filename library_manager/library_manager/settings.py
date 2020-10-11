@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Django REST framework
     'rest_framework',
-    # Tutorials application
+    # Library API application
     'library_api.apps.LibraryApiConfig',
     # CORS
     'corsheaders',

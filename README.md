@@ -4,9 +4,9 @@
 
 ---
 # TODO
-* Fix logging on docker.
-* Remove db port from expose in compose.
-* Make first runnable.
-* Continue tutorial on "Migration" part.
+-[x] Fix logging on docker.
+-[x] Comment out MongoDB port from docker-compose.
+-[x] Make first runnable.
+-[x] Continue tutorial on "Migration" part.
+-[ ] Replace djongo with django-mongodb-engine due to compatibility issues
 ---
-
