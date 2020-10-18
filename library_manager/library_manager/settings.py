@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import djongo
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = 'dhqs+r_1^n&$ed6658^)#*--2s)ul5txxpdh%spjbal7khzu5w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fast-sea-41868.herokuapp.com']
 
 
 # Application definition
@@ -37,9 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Django REST framework
+    'rest_framework',
+    # Library API application
+    'library_api.apps.LibraryApiConfig',
+    # CORS
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    # CORS
+    'corsheaders.middleware.CorsMiddleware',
+    # DEFAULT
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,6 +58,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8081',
+)
 
 ROOT_URLCONF = 'library_manager.urls'
 
@@ -75,8 +90,15 @@ WSGI_APPLICATION = 'library_manager.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'djongo',
+        'NAME': 'library_db',
+        'CLIENT': {
+            # 'host': 'mongodb+srv://omswrk1:Unix11!@cluster0.yuooh.gcp.mongodb.net/?retryWrites=true&w=majority',
+            'host': os.environ.get('DB_HOST', default='127.0.0.1'),
+            'port': int(os.environ.get('DB_PORT', default='27017')),
+            'username': os.environ.get('DB_USER', default='root'),
+            'password': os.environ.get('DB_PASS', default='example'),
+        }
     }
 }
 

@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "ec908886-2a50-49af-82fb-a9e9cd98f072",
+		"name": "book_manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create_book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Test Book\",\r\n    \"description\": \"Test Description\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/library_api",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"library_api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/library_api",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"library_api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_single_book",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/library_api/{{BOOK_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"library_api",
+						"{{BOOK_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_book",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Fosks\",\r\n    \"description\": \"Follower of Shinji-kyun-sama\",\r\n    \"published\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/library_api/{{BOOK_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"library_api",
+						"{{BOOK_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find_book_with_condition",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/library_api?title=kyun",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"library_api"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "kyun"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find_published_books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/library_api/published",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"library_api",
+						"published"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_book",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/library_api/{{BOOK_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"library_api",
+						"{{BOOK_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_all_books",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/library_api",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"library_api"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
