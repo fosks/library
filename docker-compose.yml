@@ -29,3 +29,4 @@ services:
       - 1234:8000
     environment:
       DB_HOST: mongo
+      PORT: 8000

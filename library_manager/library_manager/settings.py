@@ -26,7 +26,7 @@ SECRET_KEY = 'dhqs+r_1^n&$ed6658^)#*--2s)ul5txxpdh%spjbal7khzu5w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fast-sea-41868.herokuapp.com']
 
 
 # Application definition
@@ -93,10 +93,11 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'library_db',
         'CLIENT': {
+            # 'host': 'mongodb+srv://omswrk1:Unix11!@cluster0.yuooh.gcp.mongodb.net/?retryWrites=true&w=majority',
             'host': os.environ.get('DB_HOST', default='127.0.0.1'),
-            'port': 27017,
-            'username': 'root',
-            'password': 'example',
+            'port': int(os.environ.get('DB_PORT', default='27017')),
+            'username': os.environ.get('DB_USER', default='root'),
+            'password': os.environ.get('DB_PASS', default='example'),
         }
     }
 }
