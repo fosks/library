@@ -9,4 +9,9 @@
 -[x] Make first runnable.
 -[x] Continue tutorial on "Migration" part.
 -[ ] Replace djongo with django-mongodb-engine due to compatibility issues
+-[ ] Adjust data models to reflect assignment specification
+-[x] Set up UI (Bootstrap / React / Vue)
+-[ ] Build UI
+-[x] Add default value to Axios port
+-[ ] Set up smart pipeline
 ---
