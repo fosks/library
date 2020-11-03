@@ -148,15 +148,15 @@ export default class BooksList extends Component {
                             </div>
                             <div>
                                 <label>
-                                    <strong>Description:</strong>
+                                    <strong>Summary:</strong>
                                 </label>{" "}
-                                {currentBook.description}
+                                {currentBook.summary}
                             </div>
                             <div>
                                 <label>
-                                    <strong>Status:</strong>
+                                    <strong>Release Date:</strong>
                                 </label>{" "}
-                                {currentBook.published ? "Published" : "Pending"}
+                                {currentBook.release_date}
                             </div>
 
                             <Link

@@ -6,9 +6,9 @@ export default class Book extends Component {
 
         super(props);
         this.onChangeTitle = this.onChangeTitle.bind(this);
-        this.onChangeDescription = this.onChangeDescription.bind(this);
+        this.onChangeSummary = this.onChangeSummary.bind(this);
         this.getBook = this.getBook.bind(this);
-        this.updatePublished = this.updatePublished.bind(this);
+        this.releaseBook = this.releaseBook.bind(this);
         this.updateBook = this.updateBook.bind(this);
         this.deleteBook = this.deleteBook.bind(this);
 
@@ -16,8 +16,11 @@ export default class Book extends Component {
             currentBook: {
                 id: null,
                 title: "",
-                description: "",
-                published: false
+                author: "",
+                publisher: "",
+                summary: "",
+                release_date: "",
+                category: "",
             },
             message: ""
         };
@@ -40,13 +43,13 @@ export default class Book extends Component {
         });
     }
 
-    onChangeDescription(e) {
-        const description = e.target.value;
+    onChangeSummary(e) {
+        const summary = e.target.value;
 
         this.setState(prevState => ({
             currentBook: {
                 ...prevState.currentBook,
-                description: description
+                summary: summary
             }
         }));
     }
@@ -64,12 +67,30 @@ export default class Book extends Component {
             });
     }
 
-    updatePublished(status) {
+    stringfyDate(date) {
+
+        var dd = String(date.getDate()).padStart(2, '0');
+        var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = date.getFullYear();
+
+        date = yyyy + '-' + mm + '-' + dd;
+
+        return date;
+
+    }
+
+    releaseBook() {
+
+        const today = this.stringfyDate(new Date());
+
         var data = {
             id: this.state.currentBook.id,
             title: this.state.currentBook.title,
-            description: this.state.currentBook.description,
-            published: status
+            author: this.state.currentBook.author,
+            publisher: this.state.currentBook.publisher,
+            summary: this.state.currentBook.summary,
+            release_date: today,
+            category: this.state.currentBook.category,
         };
 
         BookDataService.update(this.state.currentBook.id, data)
@@ -77,7 +98,7 @@ export default class Book extends Component {
                 this.setState(prevState => ({
                     currentBook: {
                         ...prevState.currentBook,
-                        published: status
+                        release_date: today,
                     }
                 }));
                 console.log(response.data);
@@ -134,35 +155,35 @@ export default class Book extends Component {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="description">Description</label>
+                                <label htmlFor="summary">Summary</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="description"
-                                    value={currentBook.description}
-                                    onChange={this.onChangeDescription}
+                                    id="summary"
+                                    value={currentBook.summary}
+                                    onChange={this.onChangeSummary}
                                 />
                             </div>
 
                             <div className="form-group">
                                 <label>
-                                    <strong>Status:</strong>
+                                    <strong>Release Date:</strong>
                                 </label>
-                                {currentBook.published ? "Published" : "Pending"}
+                                {currentBook.release_date}
                             </div>
                         </form>
 
-                        {currentBook.published ? (
+                        {new Date() >= new Date(currentBook.release_date) ? (
                             <button
+                                disabled={true}
                                 className="badge badge-primary mr-2"
-                                onClick={() => this.updatePublished(false)}
                             >
-                                UnPublish
+                                Already Published
                             </button>
                         ) : (
                             <button
                                 className="badge badge-primary mr-2"
-                                onClick={() => this.updatePublished(true)}
+                                onClick={() => this.releaseBook()}
                             >
                                 Publish
                             </button>

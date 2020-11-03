@@ -6,17 +6,20 @@ export default class AddBook extends Component {
     constructor(props) {
         super(props);
         this.onChangeTitle = this.onChangeTitle.bind(this);
-        this.onChangeDescription = this.onChangeDescription.bind(this);
+        this.onChangeSummary = this.onChangeSummary.bind(this);
         this.saveBook = this.saveBook.bind(this);
         this.newBook = this.newBook.bind(this);
 
         this.state = {
             id: null,
             title: "",
-            description: "",
-            published: false,
+            author: "",
+            publisher: "",
+            summary: "",
+            release_date: "",
+            category: "",
 
-            submitted: false
+            submitted: false,
         };
     }
 
@@ -26,16 +29,16 @@ export default class AddBook extends Component {
         });
     }
 
-    onChangeDescription(e) {
+    onChangeSummary(e) {
         this.setState({
-            description: e.target.value
+            summary: e.target.value
         });
     }
 
     saveBook() {
         var data = {
             title: this.state.title,
-            description: this.state.description
+            summary: this.state.summary
         };
 
         BookDataService.create(data)
@@ -43,10 +46,13 @@ export default class AddBook extends Component {
                 this.setState({
                     id: response.data.id,
                     title: response.data.title,
-                    description: response.data.description,
-                    published: response.data.published,
+                    author: response.data.author,
+                    publisher: response.data.publisher,
+                    summary: response.data.summary,
+                    release_date: response.data.release_date,
+                    category: response.data.category,
 
-                    submitted: true
+                    submitted: true,
                 });
                 console.log(response.data);
             })
@@ -59,10 +65,13 @@ export default class AddBook extends Component {
         this.setState({
             id: null,
             title: "",
-            description: "",
-            published: false,
+            author: "",
+            publisher: "",
+            summary: "",
+            release_date: "",
+            category: "",
 
-            submitted: false
+            submitted: false,
         });
     }
 
@@ -92,15 +101,15 @@ export default class AddBook extends Component {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="description">Description</label>
+                            <label htmlFor="summary">Summary</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="description"
+                                id="summary"
                                 required
-                                value={this.state.description}
-                                onChange={this.onChangeDescription}
-                                name="description"
+                                value={this.state.summary}
+                                onChange={this.onChangeSummary}
+                                name="summary"
                             />
                         </div>
 

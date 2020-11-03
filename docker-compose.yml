@@ -20,7 +20,7 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
 
-  app:
+  backend:
     build: .
     restart: always
     depends_on:
@@ -30,3 +30,15 @@ services:
     environment:
       DB_HOST: mongo
       PORT: 8000
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - 8082:8082
+    environment:
+      REACT_APP_CONNECTION_PROTOCOL: http
+      REACT_APP_HOSTNAME: backend
+      REACT_APP_BACKEND_PORT: 8000
+      PORT: 8082
