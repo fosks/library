@@ -7,5 +7,8 @@ class BookDataSerializer(serializers.ModelSerializer):
         model = BookData
         fields = ('id',
                   'title',
-                  'description',
-                  'published')
+                  'author',
+                  'publisher',
+                  'summary',
+                  'release_date',
+                  'category')

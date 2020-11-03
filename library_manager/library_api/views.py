@@ -1,4 +1,6 @@
 # from django.shortcuts import render
+from datetime import date
+
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework import status
@@ -70,7 +72,7 @@ def book_detail(request, pk):
 @api_view(['GET'])
 def book_list_published(request):
 
-    books = BookData.objects.filter(published=True)
+    books = BookData.objects.filter(release_date__gte=date.today())
 
     # GET all published books
     if request.method == 'GET':
