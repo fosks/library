@@ -2,6 +2,7 @@ services:
 
   mongo:
     image: mongo
+    container_name: mongo
     restart: always
 #    ports: # Not required for docker-compose run
 #      - 27017:27017
@@ -11,6 +12,7 @@ services:
 
   mongo-express:
     image: mongo-express
+    container_name: mongo-express
     restart: always
     depends_on:
       - mongo
@@ -22,23 +24,34 @@ services:
 
   backend:
     build: .
+    container_name: backend
     restart: always
     depends_on:
       - mongo
     ports:
-      - 1234:8000
+      - ${BACKEND_PORT}:8000
+    volumes:
+      - ./library_manager:/app
     environment:
       DB_HOST: mongo
-      PORT: 8000
+      PORT: ${BACKEND_PORT}
+      ACCEPT_URL: ${FRONTEND_CONNECTION_PROTOCOL}://${FRONTEND_HOST}:${FRONTEND_PORT}
 
   frontend:
     build: ./frontend
+    container_name: frontend
     depends_on:
       - backend
     ports:
-      - 8082:8082
+      - ${FRONTEND_PORT}:8082
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     environment:
-      REACT_APP_CONNECTION_PROTOCOL: http
-      REACT_APP_HOSTNAME: backend
-      REACT_APP_BACKEND_PORT: 8000
-      PORT: 8082
+      REACT_APP_CONNECTION_PROTOCOL: ${FRONTEND_CONNECTION_PROTOCOL}
+      REACT_APP_HOSTNAME: ${BACKEND_HOST}
+      REACT_APP_BACKEND_PORT: ${BACKEND_PORT}
+      PORT: ${FRONTEND_PORT}
+    stdin_open: true
+    links:
+      - backend

@@ -26,7 +26,7 @@ SECRET_KEY = 'dhqs+r_1^n&$ed6658^)#*--2s)ul5txxpdh%spjbal7khzu5w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'fast-sea-41868.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', f'{os.environ.get("ALLOWED_HOST", default="")}']
 
 
 # Application definition
@@ -61,7 +61,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8081',
+    f'{os.environ.get("ACCEPT_URL", default="http://localhost:8082")}',
 )
 
 ROOT_URLCONF = 'library_manager.urls'
