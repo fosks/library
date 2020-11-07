@@ -41,7 +41,6 @@ def book_list(request):
 
     return None
 
-
 @api_view(['GET', 'PUT', 'DELETE'])
 def book_detail(request, pk):
     # find book by pk (id)
